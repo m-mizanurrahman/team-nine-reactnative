@@ -1,33 +1,41 @@
 import { Text, View } from 'native-base';
 import React, { Component } from 'react';
-import { FlatList, Image } from 'react-native';
+import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import { Alert, FlatList, Image } from 'react-native';
+import { Footer, FooterTab } from 'native-base';
 
 class App extends Component {
 
 
   myData = [
-    { title: "Bangladesh", subtitle: "MyCountry", img: "https://cdn.pixabay.com/photo/2017/03/09/07/09/bangladesh-2128620_960_720.jpg" },
+    { id: "1", title: "Bangladesh", subtitle: "MyCountry", img: "https://cdn.pixabay.com/photo/2017/03/09/07/09/bangladesh-2128620_960_720.jpg" },
 
-    { title: "India", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2012/04/26/12/50/mahatma-gandhi-42390_960_720.png' },
-    { title: "Usa", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2017/03/10/12/45/usa-2132680_960_720.jpg' },
-    { title: "Portugal", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2017/03/10/13/02/portugal-2132717_960_720.jpg' },
-    { title: "Germany", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
-    { title: "africa", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
-    { title: "bhutan", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
-    { title: "nepal", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
-    { title: "Jordan", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' }
+    { id: "2", title: "India", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2012/04/26/12/50/mahatma-gandhi-42390_960_720.png' },
+    { id: "3", title: "Usa", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2017/03/10/12/45/usa-2132680_960_720.jpg' },
+    { id: "4", title: "Portugal", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2017/03/10/13/02/portugal-2132717_960_720.jpg' },
+    { id: "5", title: "Germany", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
+    { id: "6", title: "africa", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
+    { id: "7", title: "bhutan", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
+    { id: "8", title: "nepal", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' },
+    { id: "9", title: "Jordan", subtitle: "Country", img: 'https://cdn.pixabay.com/photo/2016/04/16/11/44/german-flag-1332897__340.png' }
 
   ];
 
+
+  onClickItem = (Alerttitle) => {
+    Alert.alert(Alerttitle)
+
+  }
+
   childView = ({ Childtitle, Childsubtitle, img }) => {
     return (
-      <View style={{ flexDirection: 'column', backgroundColor: 'red', margin: 5, width: 200, height: 200 }}>
+      <View style={{ flexDirection: 'column', backgroundColor: 'white', margin: 5, width: 170, height: 200 }}>
 
         <View style={{}}>
           <Image style={{ height: 100, width: "100%" }} source={{ uri: img }} />
         </View>
         <View style={{ padding: 20 }}>
-          <Text style={{ color: 'black', fontSize: 18 }}>{Childtitle}</Text>
+          <Text onPress={this.onClickItem.bind(this, Childtitle)} style={{ color: 'black', fontSize: 18 }}>{Childtitle}</Text>
           <Text style={{ color: 'black', fontSize: 12 }}>{Childsubtitle}</Text>
         </View>
 
@@ -43,7 +51,38 @@ class App extends Component {
 
   render() {
     return (
-      <FlatList horizontal={true} data={this.myData} renderItem={({ item }) => <this.childView Childtitle={item.title} Childsubtitle={item.subtitle} img={item.img} />} />
+      <Container>
+        <Header>
+          <Left />
+          <Body>
+            <Title>Country</Title>
+          </Body>
+          <Right />
+        </Header>
+        <FlatList keyExtractor={item => item.id} numColumns={2} horizontal={false} data={this.myData} renderItem={({ item }) => <this.childView Childtitle={item.title} Childsubtitle={item.subtitle} img={item.img} />} />
+        <Footer>
+          <FooterTab>
+            <Button vertical>
+              <Icon name="apps" />
+              <Text>Apps</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="camera" />
+              <Text>Camera</Text>
+            </Button>
+            <Button vertical active>
+              <Icon active name="navigate" />
+              <Text>Navigate</Text>
+            </Button>
+            <Button vertical>
+              <Icon name="person" />
+              <Text>Contact</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
+
+
     );
   }
 }
