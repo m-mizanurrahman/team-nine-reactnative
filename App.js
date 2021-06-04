@@ -21,12 +21,12 @@ class App extends Component {
 
   childView = ({ Childtitle, Childsubtitle, img }) => {
     return (
-      <View style={{ flexDirection: 'row', backgroundColor: 'white', margin: 5, flex: 100 }}>
+      <View style={{ flexDirection: 'column', backgroundColor: 'red', margin: 5, width: 200, height: 200 }}>
 
-        <View style={{ flex: 30 }}>
-          <Image style={{ height: 70, width: "100%" }} source={{ uri: img }} />
+        <View style={{}}>
+          <Image style={{ height: 100, width: "100%" }} source={{ uri: img }} />
         </View>
-        <View style={{ flex: 70, padding: 20 }}>
+        <View style={{ padding: 20 }}>
           <Text style={{ color: 'black', fontSize: 18 }}>{Childtitle}</Text>
           <Text style={{ color: 'black', fontSize: 12 }}>{Childsubtitle}</Text>
         </View>
@@ -43,7 +43,7 @@ class App extends Component {
 
   render() {
     return (
-      <FlatList data={this.myData} renderItem={({ item }) => <this.childView Childtitle={item.title} Childsubtitle={item.subtitle} img={item.img} />} />
+      <FlatList horizontal={true} data={this.myData} renderItem={({ item }) => <this.childView Childtitle={item.title} Childsubtitle={item.subtitle} img={item.img} />} />
     );
   }
 }
